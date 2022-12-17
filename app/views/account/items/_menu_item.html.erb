@@ -1,0 +1,10 @@
+<% if can? :read, Item.new(team: current_team) %>
+  <%= render 'account/shared/menu/item', {
+    url: main_app.polymorphic_path([:account, current_team, :items]),
+    label: t('items.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('items.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>

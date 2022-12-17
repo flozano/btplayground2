@@ -64,3 +64,5 @@ dump.rdb
 /local
 
 # 🚅 add your files to ignore here.
+/vendor/bundle/ruby
+
