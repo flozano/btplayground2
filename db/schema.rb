@@ -103,6 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_173601) do
     t.bigint "added_by_id"
     t.bigint "platform_agent_of_id"
     t.jsonb "role_ids", default: []
+    t.boolean "platform_agent", default: false
     t.index ["added_by_id"], name: "index_memberships_on_added_by_id"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["platform_agent_of_id"], name: "index_memberships_on_platform_agent_of_id"
@@ -275,6 +276,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_173601) do
     t.string "otp_backup_codes", array: true
     t.string "locale"
     t.bigint "platform_agent_of_id"
+    t.string "otp_secret"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["platform_agent_of_id"], name: "index_users_on_platform_agent_of_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -325,6 +327,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_173601) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.jsonb "event_type_ids", default: []
+    t.bigint "scaffolding_absolutely_abstract_creative_concept_id"
+    t.index ["scaffolding_absolutely_abstract_creative_concept_id"], name: "index_endpoints_on_abstract_creative_concept_id"
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
   end
 
@@ -366,6 +370,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_173601) do
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "memberships"
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "scaffolding_completely_concrete_tangible_things", column: "tangible_thing_id"
   add_foreign_key "users", "oauth_applications", column: "platform_agent_of_id"
+  add_foreign_key "webhooks_outgoing_endpoints", "scaffolding_absolutely_abstract_creative_concepts"
   add_foreign_key "webhooks_outgoing_endpoints", "teams"
   add_foreign_key "webhooks_outgoing_events", "teams"
 end
